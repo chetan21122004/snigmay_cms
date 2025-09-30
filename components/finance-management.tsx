@@ -82,7 +82,7 @@ interface StudentData {
       name: string
       location: string
     }
-  }
+  }[]
   fee_payments: {
     id: string
     amount: number
@@ -109,8 +109,8 @@ interface PaymentData {
         name: string
         location: string
       }
-    }
-  }
+    }[]
+  }[]
 }
 
 interface PaymentStatsData {
@@ -124,9 +124,9 @@ interface PaymentStatsData {
       id: string
       centers: {
         id: string
-      }
-    }
-  }
+      }[]
+    }[]
+  }[]
 }
 
 export function FinanceManagement() {
@@ -217,8 +217,8 @@ export function FinanceManagement() {
         return {
           id: student.id,
           name: student.full_name,
-          batch_name: student.batches?.name || 'Unknown Batch',
-          center_location: student.batches?.centers?.location || 'Unknown Location',
+          batch_name: (student.batches && student.batches.length > 0) ? student.batches[0].name : 'Unknown Batch',
+          center_location: (student.batches && student.batches.length > 0 && student.batches[0].centers && student.batches[0].centers.length > 0) ? student.batches[0].centers[0].location : 'Unknown Location',
           monthly_fee: student.monthly_fee || 0,
           total_paid: totalPaid,
           total_outstanding: totalOutstanding,
