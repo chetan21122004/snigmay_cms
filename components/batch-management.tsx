@@ -24,6 +24,8 @@ interface Batch {
   end_time: string | null
   coach_id: string | null
   center_id: string | null
+  center_name?: string
+  coach_name?: string
 }
 
 export default function BatchManagement() {
