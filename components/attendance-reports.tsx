@@ -102,7 +102,7 @@ export function AttendanceReports() {
           date,
           status,
           students:student_id (
-            name
+            full_name
           ),
           batches:batch_id (
             name
@@ -132,11 +132,11 @@ export function AttendanceReports() {
       if (error) throw error
 
       const formattedRecords =
-        data?.map((record) => ({
+        data?.map((record: any) => ({
           id: record.id,
           date: record.date,
           status: record.status,
-          student_name: record.students?.name || "Unknown",
+          student_name: record.students?.full_name || "Unknown",
           batch_name: record.batches?.name || "Unknown",
           marked_by_name: record.users?.full_name || "Unknown",
         })) || []
