@@ -69,19 +69,20 @@ export function AttendanceReports() {
         .from("students")
         .select(`
           id,
-          name,
+          full_name,
+          batch_id,
           batches:batch_id (
             name
           )
         `)
-        .order("name")
+        .order("full_name")
 
       if (error) throw error
 
       const studentsWithBatch =
-        data?.map((student) => ({
+        data?.map((student: any) => ({
           id: student.id,
-          name: student.name,
+          name: student.full_name,
           batch_name: student.batches?.name || "No batch",
         })) || []
 

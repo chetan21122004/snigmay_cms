@@ -337,7 +337,7 @@ export function HeadCoachDashboard() {
       ] = await Promise.all([
         supabase.from('fee_payments').select('id, amount, created_at, students(full_name, batches(name, centers(location)))').eq('status', 'paid').gte('created_at', sevenDaysAgo).order('created_at', { ascending: false }).limit(10),
         supabase.from('attendance').select('id, created_at, batches(name, centers(location))').gte('created_at', sevenDaysAgo).order('created_at', { ascending: false }).limit(10),
-        supabase.from('students').select('id, full_name, created_at, batches(name, centers(location))').gte('created_at', sevenDaysAgo).order('created_at', { ascending: false }).limit(10),
+        supabase.from('students').select('id, full_name, created_at, batch_id, batches:batch_id(name, centers(location))').gte('created_at', sevenDaysAgo).order('created_at', { ascending: false }).limit(10),
         supabase.from('batches').select('id, name, created_at, centers(location)').gte('created_at', sevenDaysAgo).order('created_at', { ascending: false }).limit(10)
       ])
 
